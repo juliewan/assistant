@@ -168,6 +168,32 @@ textarea:focus {
     -moz-osx-font-smoothing: grayscale;  /* improve clarity */
   }
 
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    width: calc(100% + 80px);
+    margin-left: -40px;
+  }
+
+  .suggestion-btn {
+    background: transparent;
+    border: 1.5px solid #73675f;
+    color: #73675f;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .suggestion-btn:hover {
+    background-color: rgba(115, 103, 95, 0.1);
+  }
+
 </style>
 </head>
 <body>
@@ -181,6 +207,11 @@ textarea:focus {
 <div class="chat-container" id="chat">
   <div class="prompt" style="font-weight:700; font-size:20px;">
     Ask about her experience, qualifications 💅:
+  </div>
+  <div class="suggestions">
+    <button class="suggestion-btn" onclick="prefill(this)">authorized to work without sponsorship?</button>
+    <button class="suggestion-btn" onclick="prefill(this)">did she ship production security systems?</button>
+    <button class="suggestion-btn" onclick="prefill(this)">can she independently own ambiguous problems?</button>
   </div>
   <div class="input-row">
     <div class="input-col">
@@ -244,6 +275,12 @@ inputEl.addEventListener("keydown", function(e) {
   }
   // Shift+Enter will just insert a newline normally
 });
+
+function prefill(btn) {
+  inputEl.value = btn.textContent;
+  resizeTextarea();
+  inputEl.focus();
+}
 
 async function send() {
   const message = inputEl.value.trim();
