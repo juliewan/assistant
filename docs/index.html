@@ -2,17 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Let's Talk Julie</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;1,800&display=swap" rel="stylesheet">
+<title>julie in the loop</title>
 <style>
   html, body {
     margin: 0;
     padding: 0;
-    height: 200vh; /* allow scroll */
-    font-family: 'Inter', 'Arial', sans-serif;
+    height: 100%;
+    font-family: 'Courier New', Courier, monospace;
     background-color: #fff0f0;
   }
 
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #544b45;
+    z-index: 20;
+  }
+
+  .topbar .site-title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .topbar .site-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .topbar .site-links a {
+    color: #544b45;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .topbar .site-links a:hover {
+    border-bottom-color: #544b45;
+  }
+
+  /* "Let's Talk Julie" scroll-entry hero — disabled, replaced by the landing page + /ask chat/ page
   .hero {
     position: fixed;
     top: 0;
@@ -24,9 +61,9 @@
     justify-content: center;
     align-items: center;
     color: #544b45;
-    font-weight: 800;      /* bold */
-    font-style: normal;    /* italic */
-    font-size: 10vw;       /* massive and responsive */
+    font-weight: 800;
+    font-style: normal;
+    font-size: 10vw;
     text-align: center;
     transition: opacity 0.8s ease, transform 0.8s ease;
     z-index: 10;
@@ -36,7 +73,7 @@
     margin-top: 20px;
     font-size: 5vw;
     animation: bounce 1.5s infinite;
-    display: inline-block; /* ensures proper stacking and animation */
+    display: inline-block;
   }
 
   @keyframes bounce {
@@ -54,340 +91,81 @@
   .hero.hidden .arrow {
     opacity: 0;
   }
+  */
 
-  /* Chat section */
-.chat-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 5;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.chat-container.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.prompt {
-  font-size: 20px;
-  font-weight: 700;
-  color: #544b45;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-
-.input-row {
-  display: flex;
-  align-items: flex-start;
-  width: calc(100% + 60px);
-  gap: 8px;
-}
-
-.input-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 42px;
-  max-height: 180px;
-  padding: 12px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-  box-shadow: none;
-  resize: none;
-  overflow-y: auto;
-  font-family: 'Inter', 'Arial', sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  color: #73675f;
-  box-sizing: border-box;
-  transition: height 0.15s ease-out;
-}
-
-textarea:focus {
-  outline: none;
-  box-shadow: none;
-  border: none;
-}
-
-#sendButton {
-  flex-shrink: 0;
-  padding: 12px 20px;
-  border-radius: 999px;  /* pill shape */
-  border: none;
-  background-color: #73675f;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-#sendButton:hover {
-  background-color: #e3a8d6;
-  outline: none;
-  border: none;
-}
-
-  #output {
-    display: none;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 12px 16px;
-    margin-top: 8px;
-    max-height: 300px;
-    overflow-y: auto;
-    font-family: 'Inter', 'Arial', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.4;
+  .sidebar {
+    position: fixed;
+    top: 70px;
+    right: 24px;
+    max-width: 220px;
     color: #73675f;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    z-index: 15;
   }
 
-  #output b {
-    font-weight: 800;     /* very strong bold */
-    color: #73675f;       /* same color */
-    -webkit-font-smoothing: antialiased; /* improve clarity */
-    -moz-osx-font-smoothing: grayscale;  /* improve clarity */
+  .sidebar-section + .sidebar-section {
+    margin-top: 20px;
   }
 
-  .suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    width: calc(100% + 80px);
-    margin-left: -40px;
+  .sidebar .sidebar-title {
+    display: inline-block;
+    font-weight: 700;
+    color: #544b45;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    text-decoration: none;
   }
 
-  .suggestion-btn {
-    background: transparent;
-    border: 1.5px solid #73675f;
-    color: #73675f;
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-family: 'Inter', 'Arial', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  .sidebar .sidebar-title:hover {
+    text-decoration: underline;
   }
 
-  .suggestion-btn:hover {
-    background-color: rgba(115, 103, 95, 0.1);
+  .sidebar p {
+    margin: 0;
   }
 
+  @media (max-width: 640px) {
+    .sidebar {
+      position: static;
+      max-width: none;
+      margin: 90px 24px 24px;
+    }
+  }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <div class="site-title">julie in the loop</div>
+  <div class="site-links">
+    <a href="blog.html">blog</a>
+    <a href="contact.html">contact</a>
+    <a href="chat.html">ask chat</a>
+  </div>
+</div>
+
+<!-- "Let's Talk Julie" scroll-entry hero — disabled, replaced by the landing page + /ask chat/ page
 <div class="hero" id="hero">
   Let's Talk<br>Julie
   <div class="arrow">⬇️</div>
   <div class="arrow">⬇️</div>
 </div>
+-->
 
-<div class="chat-container" id="chat">
-  <div class="prompt" style="font-weight:700; font-size:20px;">
-    Ask about her experience, qualifications 💅:
+<div class="sidebar">
+  <div class="sidebar-section">
+    <a class="sidebar-title" href="blog.html">blog</a>
+    <p>Short-and-potentially-sweet/incomplete posts as hyperfocus was outsourced to Opus and context holding has annexed my brain.</p>
   </div>
-  <div class="suggestions">
-    <button class="suggestion-btn" onclick="prefill(this)">authorized to work without sponsorship?</button>
-    <button class="suggestion-btn" onclick="prefill(this)">did she ship production security systems?</button>
-    <button class="suggestion-btn" onclick="prefill(this)">can she independently own ambiguous problems?</button>
+  <div class="sidebar-section">
+    <a class="sidebar-title" href="chat.html">ask chat</a>
+    <p>about my professional experience.</p>
   </div>
-  <div class="input-row">
-    <div class="input-col">
-      <textarea id="input" placeholder=""></textarea>
-      <p id="output"></p>
-    </div>
-    <button id="sendButton" onclick="send()">Send</button>
-  </div>
-  <p id="disclaimer" style="display:none; font-size:12px; color:#fff; margin-top:5px; width:100%; text-align:center;">
-    Responses by GPT-5 Nano
-  </p>
 </div>
-
-<script>
-const hero = document.getElementById('hero');
-const arrows = document.querySelectorAll('.arrow');
-const chat = document.getElementById('chat');
-const textarea = document.getElementById("input");
-const outputEl = document.getElementById("output");
-const disclaimerEl = document.getElementById("disclaimer");
-
-// Auto-grow textarea
-const sendButton = document.getElementById("sendButton");
-const style = getComputedStyle(textarea);
-const lineHeight = parseInt(style.lineHeight);
-const padding = parseInt(style.paddingTop) + parseInt(style.paddingBottom);
-
-function resizeTextarea() {
-  textarea.style.height = "auto";
-  const newHeight = textarea.scrollHeight;
-  const minHeight = lineHeight + padding;
-  const maxHeight = 180;
-  const clamped = Math.min(Math.max(newHeight, minHeight), maxHeight);
-  textarea.style.height = clamped + "px";
-  textarea.style.overflowY = newHeight > maxHeight ? "auto" : "hidden";
-  sendButton.style.marginTop = Math.max(0, (clamped - sendButton.offsetHeight) / 2) + "px";
-}
-
-textarea.addEventListener("input", resizeTextarea);
-requestAnimationFrame(resizeTextarea);
-
-// Scroll reveal
-window.addEventListener('scroll', () => {
-  if (window.scrollY > window.innerHeight / 2) {
-    hero.classList.add('hidden');
-    arrows.forEach(a => a.style.opacity = '0');
-    chat.classList.add('visible');
-  } else {
-    hero.classList.remove('hidden');
-    arrows.forEach(a => a.style.opacity = '1');
-    chat.classList.remove('visible');
-  }
-});
-
-const inputEl = document.getElementById("input");
-
-inputEl.addEventListener("keydown", function(e) {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault(); // prevent newline
-    send();             // trigger send
-  }
-  // Shift+Enter will just insert a newline normally
-});
-
-function prefill(btn) {
-  inputEl.value = btn.textContent;
-  resizeTextarea();
-  inputEl.focus();
-}
-
-async function send() {
-  const message = inputEl.value.trim();
-  if (!message) return;
-
-  // Prepare output
-  outputEl.style.display = "block";
-  outputEl.innerHTML = "Checking on that for you... need a hot sec 😁";
-  outputEl.style.color = "#73675f";
-  disclaimerEl.style.display = "none";
-
-  try {
-    const res = await fetch(
-      "https://assistant-server-git-main-juliewans-projects.vercel.app/api/chat",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      }
-    );
-
-    const contentType = res.headers.get("Content-Type") || "";
-    if (!res.ok || !contentType.includes("text/event-stream")) {
-      const data = await res.json();
-      const text = (data.reply || data.error || "Unknown error").replace(/\\\$/g, "$");
-      outputEl.innerHTML = text;
-      disclaimerEl.style.display = "block";
-      return;
-    }
-
-    // SSE streaming
-    outputEl.innerHTML = "";
-    outputEl.style.color = "#73675f";
-    disclaimerEl.style.display = "none";
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
-    let fullText = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split("\n");
-      buffer = lines.pop();
-
-      for (const line of lines) {
-        if (!line.startsWith("data: ")) continue;
-        const payload = line.slice(6).trim();
-        if (payload === "[DONE]") break;
-
-        try {
-          const json = JSON.parse(payload);
-          const token = json.choices?.[0]?.delta?.content;
-          if (token) fullText += token;
-        } catch {}
-      }
-    }
-
-    fullText = fullText.replace(/\n/g, "<br>");
-
-    function typeHTMLSafe(html, element, speed = 10) {
-      let i = 0;
-      let displayed = "";
-
-      function step() {
-        if (i >= html.length) {
-          disclaimerEl.style.display = "block";
-          return;
-        }
-
-        if (html[i] === "<") {
-          const match = html.slice(i).match(/^<(\/?b|br)>/i);
-          if (match) {
-            displayed += match[0];
-            i += match[0].length;
-          } else {
-            displayed += "&lt;";
-            i++;
-          }
-        } else if (html[i] === "&") {
-          displayed += "&amp;";
-          i++;
-        } else {
-          displayed += html[i];
-          i++;
-        }
-
-        element.innerHTML = displayed; // assign, not +=, so open tags aren't auto-closed
-        setTimeout(step, speed);
-      }
-
-      step();
-    }
-
-    typeHTMLSafe(fullText, outputEl, 10);
-
-  } catch (err) {
-    console.error("Fetch error:", err);
-    outputEl.innerHTML = "Fetch failed womp womp";
-    outputEl.style.color = "#73675f";
-    disclaimerEl.style.display = "none";
-  }
-}
-</script>
 
 </body>
 </html>

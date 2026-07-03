@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>contact — julie in the loop</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #fff0f0;
+    color: #73675f;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #544b45;
+    z-index: 20;
+    background-color: #fff0f0;
+  }
+
+  .topbar .site-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #544b45;
+    text-decoration: none;
+  }
+
+  .topbar .site-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .topbar .site-links a {
+    color: #544b45;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .topbar .site-links a:hover {
+    border-bottom-color: #544b45;
+  }
+
+  main {
+    min-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+  }
+
+  main h2 {
+    color: #544b45;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+  }
+
+  main a.email {
+    color: #544b45;
+    font-size: 18px;
+    text-decoration: none;
+    border-bottom: 1px solid #544b45;
+  }
+
+  main a.email:hover {
+    color: #73675f;
+    border-bottom-color: #73675f;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="site-title" href="index.html">julie in the loop</a>
+  <div class="site-links">
+    <a href="index.html">home</a>
+    <a href="blog.html">blog</a>
+    <a href="chat.html">ask chat</a>
+  </div>
+</div>
+
+<main>
+  <h2>contact</h2>
+  <a class="email" href="mailto:julieintheloop@gmail.com">julieintheloop@gmail.com</a>
+</main>
+
+</body>
+</html>

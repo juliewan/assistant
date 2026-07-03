@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>blog — julie in the loop</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #fff0f0;
+    color: #73675f;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #544b45;
+    z-index: 20;
+    background-color: #fff0f0;
+  }
+
+  .topbar .site-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #544b45;
+    text-decoration: none;
+  }
+
+  .topbar .site-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .topbar .site-links a {
+    color: #544b45;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .topbar .site-links a:hover {
+    border-bottom-color: #544b45;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  h2 {
+    color: #544b45;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+  }
+
+  section + section {
+    margin-top: 48px;
+  }
+
+  .about p {
+    margin: 0 0 16px;
+  }
+
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .post-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(115, 103, 95, 0.15);
+  }
+
+  .post-list a {
+    color: #544b45;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .post-list a:hover {
+    text-decoration: underline;
+  }
+
+  .post-list .post-date {
+    color: #a3968d;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="site-title" href="index.html">julie in the loop</a>
+  <div class="site-links">
+    <a href="index.html">home</a>
+    <a href="contact.html">contact</a>
+    <a href="chat.html">ask chat</a>
+  </div>
+</div>
+
+<main>
+  <section class="about">
+    <h2>about</h2>
+    <p>I haven't written-written in a while, not since unceremoniously dropping the creative writing minor, and barring the occasional deleterious review. But I was def writing before chat, and there&rsquo;s no reason my quasi-authentic prose (quasi, because while extensive, my employed vocabulary was not without help--I'd scour the thesaurus like a rolodex, clinging to beloved words like totems) shouldn't be training corpus for the next few generations of GPT.</p>
+    <p>To this cancerously digital and screen-pacified era, wherein people are increasingly unattuned, terrible at listening, and offer only an anemic empathy, I impart slivers of thinking for those whose preferred sensory intake is textual: aphonic and non-buffering, decoupled and privately consumed.</p>
+  </section>
+
+  <section class="posts">
+    <h2>posts</h2>
+    <ul class="post-list">
+      <li>
+        <span class="post-date">2026-07-03</span>
+        <a href="posts/high-precision-detections.html">High Precision Detections | Non-human Insider Threat</a>
+      </li>
+    </ul>
+  </section>
+</main>
+
+</body>
+</html>
