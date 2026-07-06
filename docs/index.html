@@ -2,226 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>julie-in-the-loop</title>
+<meta name="description" content="Julie Wan — detection engineering & applied AI. Insider risk, LLM-assisted triage, and agent behavioral analytics. Ask the chat about her experience, or read the blog.">
+<link rel="canonical" href="https://juliewan.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="julie-in-the-loop">
+<meta property="og:description" content="Detection engineering & applied AI — insider risk, LLM-assisted triage, agent behavioral analytics.">
+<meta property="og:url" content="https://juliewan.github.io/">
+<meta property="og:image" content="https://juliewan.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/marie-favicon.png">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    /* right-side sidebar footprint (right gap 24px + max-width 220px).
-       content centers in the viewport MINUS this column → biased left. */
-    --nav-width: 244px;
-  }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #fff0f0;
-  }
-
-  /* "Let's Talk Julie" scroll-entry hero — disabled, replaced by the landing page + /ask chat/ page
-  .hero {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .landing {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16vh 24px 60px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: #544b45;
-    font-weight: 800;
-    font-style: normal;
-    font-size: 10vw;
     text-align: center;
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    z-index: 10;
   }
 
-  .arrow {
-    margin-top: 20px;
-    font-size: 5vw;
-    animation: bounce 1.5s infinite;
-    display: inline-block;
-  }
-
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(10px); }
-    60% { transform: translateY(5px); }
-  }
-
-  .hero.hidden {
-    opacity: 0;
-    transform: translateY(-50px);
-    pointer-events: none;
-  }
-
-  .hero.hidden .arrow {
-    opacity: 0;
-  }
-  */
-
-  .sidebar {
-    position: fixed;
-    top: 100px;
-    bottom: 24px;
-    right: 24px;
-    max-width: 220px;
-    display: flex;
-    flex-direction: column;
-    color: #73675f;
-    font-size: 12px;
-    line-height: 1.5;
-    text-align: left;
-    z-index: 15;
-  }
-
-  .sidebar-section + .sidebar-section {
-    margin-top: 20px;
-  }
-
-  .sidebar .sidebar-title {
-    display: inline-block;
-    font-weight: 700;
-    color: #544b45;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-    text-decoration: none;
-  }
-
-  .sidebar .sidebar-title:hover {
-    text-decoration: underline;
-  }
-
-  .sidebar p {
-    margin: 0;
-  }
-
-  .sidebar-contact {
-    margin-top: 60px;
-  }
-
-  .sidebar-contact .icon-row {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 10px;
-  }
-
-  .sidebar-contact .email {
-    display: block;
-    color: #544b45;
-    font-size: 12px;
-  }
-
-  .sidebar-contact .icon-row a {
-    display: inline-flex;
-    opacity: 1;
-    transition: opacity 0.2s;
-  }
-
-  .sidebar-contact .icon-row a:hover {
-    opacity: 0.6;
-  }
-
-  .sidebar-contact .icon-row img {
-    width: 18px;
-    height: 18px;
-    display: block;
-  }
-
-  @media (max-width: 640px) {
-    :root {
-      --nav-width: 0px;    /* sidebar stacks below — no right column to avoid */
-    }
-
-    .sidebar {
-      position: static;
-      max-width: none;
-      margin: 90px 24px 24px;
-    }
-
-    .sidebar-contact {
-      margin-top: 20px;
-    }
-  }
-
-  /* ── centered wordmark, wave animation ─────────────────── */
   .wordmark {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: flex-start;    /* sit high — around the top third   */
-    justify-content: center;
-    padding: 18vh 24px 24px;
-    padding-right: calc(24px + var(--nav-width));  /* center left of the sidebar */
-    z-index: 5;                 /* below sidebar (15) + topbar (20) */
-    pointer-events: none;       /* clicks pass through to links     */
+    line-height: 0;
+    /* .landing sets text-align:center for the tagline/buttons below; without
+       overriding it here, each ASCII-art row (rows aren't padded to equal
+       width) gets centered independently within the widest row, shearing
+       shorter rows sideways relative to longer ones. */
+    text-align: left;
   }
 
   .wordmark pre {
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(5px, 1.45vw, 13px);
-    line-height: 1.05;
-    color: #b98a86;
+    font-family: var(--mono);
+    /* integer-pixel font size: a fractional size (1.9vw) puts every glyph at
+       fractional coordinates, and each one snaps to the pixel grid on its
+       own — letters shear apart. round() keeps it responsive but always
+       lands on a whole pixel. (first declaration = fallback for browsers
+       without css round()) */
+    font-size: clamp(6px, 1.9vw, 13px);
+    font-size: round(clamp(6px, 1.9vw, 13px), 1px);
+    /* rows must tile edge-to-edge: the block glyphs fill the em box, so any
+       leading (1.05) opens a hairline seam across every letter */
+    line-height: 1;
+    color: var(--accent);
     white-space: pre;
   }
 
-  .wordmark .wv {
+  /* every character — glyphs AND spaces — lives in an identical fixed 1ch
+     cell, so all rows share the exact same column grid. (mixing plain-text
+     spaces with inline-block glyph boxes lets rows accumulate different
+     rounding and shear apart.) */
+  .wordmark .wv,
+  .wordmark .ws {
     display: inline-block;
-    transform-origin: bottom center;   /* squash/stretch stands on the floor */
+    width: 1ch;
+  }
+
+  .wordmark .wv {
     /* one full cycle = time for the hop to cross the width + a rest gap */
     animation: wordmark-hop 5.2s linear infinite;
     animation-delay: var(--d, 0s);
+    /* composite the hop: the glyph is rasterized once and moved as a layer,
+       instead of re-snapping to the pixel grid on every frame (which makes
+       cells in the same column land on different pixels mid-hop) */
     will-change: transform;
   }
 
-  /* pixar-lamp hop: crouch (anticipation) → big launch, stretched → smack
-     the floor, squashed → a couple of decaying bounces → settle → long rest.
-     the per-column delay marches this hop left → right, stadium-wave style.
-     per-keyframe easing fakes gravity: decelerate on the way up, accelerate
-     on the way down. */
+  /* hop: crouch (anticipation) → launch → a couple of decaying bounces →
+     settle → long rest. the per-column delay marches this hop left → right,
+     stadium-wave style. per-keyframe easing fakes gravity: decelerate on the
+     way up, accelerate on the way down.
+     NOTE: vertical offset only — no squash/stretch. these are block-drawing
+     glyphs (▄ █ ▀) that tile edge-to-edge into solid shapes; any scale()
+     tears that tiling. every cell in a column shares the same --d, so a pure
+     vertical offset keeps each column rigid. */
   @keyframes wordmark-hop {
-    0%    { transform: translateY(0)       scale(1, 1);      animation-timing-function: ease-in;  }
-    1.8%  { transform: translateY(0.1em)   scale(1.16, 0.7); animation-timing-function: ease-out; } /* anticipation crouch */
-    5.3%  { transform: translateY(-1.1em)  scale(0.9, 1.16); animation-timing-function: ease-in;  } /* launch → apex, stretched */
-    9%    { transform: translateY(0)       scale(1.18, 0.72);animation-timing-function: ease-out; } /* hit the floor, squash */
-    11%   { transform: translateY(-0.34em) scale(0.97, 1.06);animation-timing-function: ease-in;  } /* bounce back up */
-    12.8% { transform: translateY(0)       scale(1.08, 0.86);animation-timing-function: ease-out; } /* land, small squash */
-    14%   { transform: translateY(-0.1em)  scale(1, 1.02);   animation-timing-function: ease-in;  } /* last little hop */
-    15%   { transform: translateY(0)       scale(1, 1); }                                           /* settle */
-    100%  { transform: translateY(0)       scale(1, 1); }                                           /* rest until the wave loops */
+    0%    { transform: translateY(0);       animation-timing-function: ease-in;  }
+    1.8%  { transform: translateY(0.12em);  animation-timing-function: ease-out; } /* anticipation dip */
+    5.3%  { transform: translateY(-1.1em);  animation-timing-function: ease-in;  } /* launch → apex */
+    9%    { transform: translateY(0);       animation-timing-function: ease-out; } /* land */
+    11%   { transform: translateY(-0.34em); animation-timing-function: ease-in;  } /* bounce back up */
+    12.8% { transform: translateY(0);       animation-timing-function: ease-out; } /* land */
+    14%   { transform: translateY(-0.1em);  animation-timing-function: ease-in;  } /* last little hop */
+    15%   { transform: translateY(0); }                                           /* settle */
+    100%  { transform: translateY(0); }                                           /* rest until the wave loops */
   }
 
   @media (prefers-reduced-motion: reduce) {
     .wordmark .wv { animation: none; }
   }
+
+  .tagline {
+    max-width: 30em;
+    margin: 28px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--body);
+  }
+
+  .landing-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .pill-link {
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+  }
+
+  .pill-link.primary {
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+
+  .pill-link.primary:hover {
+    background-color: var(--accent-warm);
+    color: #fff;
+  }
+
+  .pill-link.ghost {
+    border: 1.5px solid var(--body);
+    color: var(--body);
+  }
+
+  .pill-link.ghost:hover {
+    opacity: 0.6;
+  }
+
+  .landing-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+    max-width: 32em;
+  }
+
+  .chip-label {
+    width: 100%;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .chip {
+    background: transparent;
+    border: 1.5px solid var(--body);
+    color: var(--body);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .chip:hover {
+    background-color: rgba(115, 103, 95, 0.1);
+  }
+
+  @media (max-width: 1000px) {
+    /* no topbar on the landing page, so don't reserve room for one */
+    .sidebar { margin-top: 24px; }
+    .landing { padding-top: 6vh; }
+  }
 </style>
 </head>
-<body>
-
-<!-- "Let's Talk Julie" scroll-entry hero — disabled, replaced by the landing page + /ask chat/ page
-<div class="hero" id="hero">
-  Let's Talk<br>Julie
-  <div class="arrow">⬇️</div>
-  <div class="arrow">⬇️</div>
-</div>
--->
-
-<div class="wordmark" aria-hidden="true"><pre id="wordmark-art"></pre></div>
+<body class="has-sidebar-column">
 
 <div class="sidebar">
-  <div class="sidebar-section">
-    <a class="sidebar-title" href="blog.html">blog</a>
-    <p>Short-and-potentially-sweet/incomplete posts as hyperfocus was outsourced to Opus and context holding has annexed my brain.</p>
-  </div>
-  <div class="sidebar-section">
-    <a class="sidebar-title" href="chat.html">ask chat</a>
-    <p>about my professional experience.</p>
+  <div class="sidebar-nav">
+    <div class="sidebar-section">
+      <a class="sidebar-title" href="blog.html">blog</a>
+      <p>Short-and-potentially-sweet/incomplete posts as hyperfocus was outsourced to Opus and context holding has annexed my brain.</p>
+    </div>
+    <div class="sidebar-section">
+      <a class="sidebar-title" href="chat.html">ask chat</a>
+      <p>about my professional experience.</p>
+    </div>
   </div>
   <div class="sidebar-contact">
     <div class="icon-row">
@@ -235,6 +204,23 @@
     <span class="email">julieintheloop@gmail.com</span>
   </div>
 </div>
+
+<main class="landing">
+  <div class="wordmark" aria-label="julie-in-the-loop"><pre id="wordmark-art" aria-hidden="true"></pre></div>
+
+  <p class="tagline">Still human in a machine-speed era.</p>
+
+  <div class="landing-actions">
+    <a class="pill-link primary" href="blog.html">read blog</a>
+  </div>
+
+  <div class="landing-chips">
+    <span class="chip-label">or ask chat,</span>
+    <a class="chip" href="chat.html?q=what%20has%20she%20shipped%3F">what has she shipped?</a>
+    <a class="chip" href="chat.html?q=how%20to%20detect%20a%20rogue%20agent%3F">how to detect a rogue agent?</a>
+    <a class="chip" href="chat.html?q=what%20is%20she%20%20towards%3F">what is she looking towards?</a>
+  </div>
+</main>
 
 <script>
 (() => {
@@ -256,13 +242,12 @@
   for (const line of lines) {
     const row = document.createDocumentFragment();
     [...line].forEach((ch, col) => {
-      if (ch === " ") {              // spaces just hold the grid, no need to animate
-        row.appendChild(document.createTextNode(" "));
-        return;
-      }
       const span = document.createElement("span");
-      span.className = "wv";
+      // spaces get the same fixed 1ch cell as the glyphs (identical cells =
+      // rows can't shear apart), just without the animation
+      span.className = ch === " " ? "ws" : "wv";
       span.textContent = ch;
+      if (ch === " ") { row.appendChild(span); return; }
       // positive, growing delay → each column hops a beat later than the one
       // to its left, so the crest sweeps left → right
       span.style.setProperty("--d", `${(col * STEP).toFixed(2)}s`);
@@ -272,6 +257,10 @@
     pre.appendChild(document.createTextNode("\n"));
   }
 })();
+
+// devtools easter egg — recruiters' engineers do open the console
+console.log("%cjulie-in-the-loop", "color:#b98a86;font-weight:700;font-size:14px");
+console.log("%cpoking around? the ascii is generated in the script above. say hi: julieintheloop@gmail.com", "color:#8a7a6f");
 </script>
 </body>
 </html>
